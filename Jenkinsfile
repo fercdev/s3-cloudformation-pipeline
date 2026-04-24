@@ -16,6 +16,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
                     sh 'aws --version'
+                    sh "ls -la"
                 }
             }
         }
@@ -26,7 +27,7 @@ pipeline {
                 withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
                     sh '''
                     aws cloudformation deploy \
-                      --template-file cloudformation/s3-bucket.yaml \
+                      --template-file cloudformation/s3-bucket.yml \
                       --stack-name ${STACK_NAME} \
                       --capabilities CAPABILITY_NAMED_IAM
                     '''
