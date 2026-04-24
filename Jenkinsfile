@@ -7,6 +7,15 @@ pipeline {
     }
 
     stages {
+        stage('Validate Cli veresion') {
+            steps {
+                withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
+                    sh 'aws --version'
+                }
+            }
+        }
+
+
         stage('Deploy CloudFormation (Create Bucket)') {
             steps {
                 withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
